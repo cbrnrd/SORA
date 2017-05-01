@@ -14,7 +14,7 @@ _______ _______ ______ _______
 
 Made with <3 by AM-77
 
-To stop the server, type \`pkill ruby'\n"
+To stop the server, type \`pkill ruby'\n\n"
 puts "[!] Starting bot listener on port #{port}"
 server = TCPServer.new("0.0.0.0", port)  # Change this to the port you have the client connecting to
 
