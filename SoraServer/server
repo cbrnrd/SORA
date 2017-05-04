@@ -5,7 +5,7 @@ require 'core'
 
 begin
 
-  port = ARGV[1].to_i  # This has to be the same port that the bot is connecting back to
+  port = ARGV[0].to_i  # This has to be the same port that the bot is connecting back to
   masterport = 45678
   locip = local_ip  # If we aren't connected to the outernet
 
