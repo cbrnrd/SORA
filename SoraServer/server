@@ -7,7 +7,6 @@ begin
 
   port = ARGV[0].to_i  # This has to be the same port that the bot is connecting back to
   masterport = 45678
-  locip = local_ip  # If we aren't connected to the outernet
 
   puts "
    _______ _______ ______ _______
@@ -18,7 +17,7 @@ begin
   Made with <3 by AM-77
 
   To stop the server, type CTRL+C\n\n"
-  print_status("Starting bot listener on #{locip}:#{port}")
+  print_status("Starting bot listener on port #{port} using all interfaces")
   server = TCPServer.new("", port)
 
   # Always override previous file
