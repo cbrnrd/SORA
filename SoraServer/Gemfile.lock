@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    colorize (0.8.1)
+    geoip (1.6.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  colorize
+  geoip
+
+BUNDLED WITH
+   1.14.6

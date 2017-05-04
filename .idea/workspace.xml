@@ -2,47 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4328e48f-b411-482c-b234-c705d4121716" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/Client$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/Client.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/Tests.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$10.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$2.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$3.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$4.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$5.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$6.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$7.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$8.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$9.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$Base64.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$CloseOperation.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$ConnectionFactory$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$ConnectionFactory.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$FlushOperation.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$HttpRequestException.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$Operation.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$RequestOutputStream.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$UploadProgress$1.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$UploadProgress.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/RegistryUtils.class" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/description.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/project-template.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SORA.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SoraClient/com/am77/OldClient.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SoraClient/com/am77/extern/HttpRequest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SoraClient/com/am77/extern/RegistryUtils.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SoraServer/server.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HttpBotnetServer/botmaster.rb" afterPath="$PROJECT_DIR$/SoraServer/botmaster.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/HttpBotnetServer/server.rb" afterPath="$PROJECT_DIR$/SoraServer/orig_server.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/Client$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/Client.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/Tests.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$10.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$2.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$3.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$4.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$5.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$6.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$7.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$8.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$9.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$Base64.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$CloseOperation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$ConnectionFactory$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$ConnectionFactory.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$FlushOperation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$HttpRequestException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$Operation.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$RequestOutputStream.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$UploadProgress$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest$UploadProgress.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/HttpRequest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/SORA/com/am77/extern/RegistryUtils.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SoraServer/botmaster.rb" afterPath="$PROJECT_DIR$/SoraServer/botmaster.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SoraServer/orig_server.rb" afterPath="$PROJECT_DIR$/SoraServer/orig_server.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,8 +45,8 @@
       <file leaf-file-name="OldClient.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SoraClient/com/am77/OldClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="22" column="74" lean-forward="false" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
+            <state relative-caret-position="250">
+              <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -441,7 +428,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32886904" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32886904" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -571,8 +558,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SoraClient/com/am77/OldClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="22" column="74" lean-forward="false" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
+        <state relative-caret-position="250">
+          <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding />
         </state>
       </provider>

