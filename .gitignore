@@ -9,7 +9,9 @@ out
 server.py
 
 # Old stuff
-HttpBotnetClien*
+HttpBotnetClient
 OldClient.java
+*.cs
+*.sln
 
 
