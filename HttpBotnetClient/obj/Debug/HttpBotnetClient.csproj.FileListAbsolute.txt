@@ -1,6 +1,0 @@
-C:\Users\Carter\documents\visual studio 2015\Projects\HttpBotnetClient\HttpBotnetClient\obj\Debug\HttpBotnetClient.csprojResolveAssemblyReference.cache
-C:\Users\Carter\documents\visual studio 2015\Projects\HttpBotnetClient\HttpBotnetClient\bin\Debug\JavaRuntime.exe.config
-C:\Users\Carter\documents\visual studio 2015\Projects\HttpBotnetClient\HttpBotnetClient\bin\Debug\JavaRuntime.exe
-C:\Users\Carter\documents\visual studio 2015\Projects\HttpBotnetClient\HttpBotnetClient\bin\Debug\JavaRuntime.pdb
-C:\Users\Carter\documents\visual studio 2015\Projects\HttpBotnetClient\HttpBotnetClient\obj\Debug\JavaRuntime.exe
-C:\Users\Carter\documents\visual studio 2015\Projects\HttpBotnetClient\HttpBotnetClient\obj\Debug\JavaRuntime.pdb
