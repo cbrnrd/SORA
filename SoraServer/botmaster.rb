@@ -35,7 +35,6 @@ loop do
       print_err("Master login failed (used #{uname}:#{password})")
     end
     print_good("Master login successful!")
-    master.print "\u001B[2J"
     master.print "
 ███████╗     ██████╗     ██████╗      █████╗
 ██╔════╝    ██╔═══██╗    ██╔══██╗    ██╔══██╗

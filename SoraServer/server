@@ -6,6 +6,10 @@ require 'core'
 begin
 
   port = ARGV[0].to_i  # This has to be the same port that the bot is connecting back to
+  if port == 0
+    print_err("Please input a port")
+    exit
+  end
   masterport = 45678
 
   puts "
