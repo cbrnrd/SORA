@@ -5,10 +5,8 @@ out
 .vs
 .idea
 
-# In progress
+# Old
 server.py
-
-# Old stuff
 HttpBotnetClient
 OldClient.java
 *.cs
