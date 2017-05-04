@@ -3,6 +3,7 @@ require 'core'
 
 @SORA_LIB_BASE = File.expand_path File.dirname(__FILE__)
 
+# Get the local ip
 def local_ip
   orig = Socket.do_not_reverse_lookup
   Socket.do_not_reverse_lookup = true # turn off reverse DNS resolution temporarily
