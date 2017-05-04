@@ -1,4 +1,5 @@
 require 'colorize'
+require 'rbnacl'
 
 def print_status(msg='')
   ind = "[!] ".colorize(:blue)
