@@ -16,6 +16,7 @@ ensure
 end
 
 # Pass the ip and client socket into the function
+# TODO: Format the output so it looks nice
 def geolocate(ip, client)
   c = GeoIP.new("#{@SORA_LIB_BASE}/data/GeoLiteCity.dat").city(ip)
   client.puts c
