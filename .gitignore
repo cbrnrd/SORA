@@ -12,4 +12,5 @@ OldClient.java
 *.cs
 *.sln
 
-
+# Local scripts
+commit

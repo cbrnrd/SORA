@@ -1,5 +1,7 @@
 require 'rbnacl'
+require 'core'
 
-def doublehash(msg)
-  # TODO do a double hash: SHA-256 -> something else using RbNaCl
+# The client will compare the hash instead of the message
+def sha256(msg)
+  RbNaCl::Hash.sha256(msg)
 end
