@@ -5,7 +5,8 @@
 3. `gem install bundler && bundle install`
 
 ## Starting the _bot_ listener server
-1. `./server <port>`
+1. `./server <port>` (run in the foreground)
+1. `screen ./server <port>` (rin in a seperate terminal
 
 Be sure that `<port>` is the same port that you have configured the bots to connect back to.
 
