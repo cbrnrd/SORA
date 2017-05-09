@@ -2,10 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     colorize (0.8.1)
-    ffi (1.9.18)
     geoip (1.6.3)
-    rbnacl (4.0.2)
-      ffi
 
 PLATFORMS
   ruby
@@ -13,7 +10,6 @@ PLATFORMS
 DEPENDENCIES
   colorize
   geoip
-  rbnacl
 
 BUNDLED WITH
    1.14.6

