@@ -68,7 +68,7 @@ begin
 
       # Print info
       print_good("New bot connection from #{wanip}\n")
-      bot_file.write("#{socket.peeraddr[3]}::#{os}::#{wanip}\n")  # XXX maybe replace socket.peeraddr with wanip
+      bot_file.write("#{socket.peeraddr[3]}::#{os}::#{wanip} (Connected: #{Time.now.inspect})\n")  # XXX maybe replace socket.peeraddr with wanip
       bot_file.close
 
       STDERR.puts request
