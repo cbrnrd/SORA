@@ -1,7 +1,13 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << './lib'
 require 'socket'
+require 'pathname'
 require 'core'
+
+File.open('settings.ini', 'w') do |file|
+  file.write("#{Process.pid}\n")
+  file.close
+end
 
 begin
 

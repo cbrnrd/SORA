@@ -7,7 +7,12 @@ uname = 'botmaster'    # Change this
 password = 'ilovedogs' # Change this
 cmd = ''
 
-# TODO write process id's to file so we can kill them properly
+
+def get_pids
+  a = IO.readlines('settings.ini')
+  a.each { |e| pids << e }
+  pids
+end
 
 def debug(msg='')
   if ARGV.include?('DEBUG')
@@ -44,7 +49,7 @@ def checkAttackCmd(command, client)
 end
 
 
-
+write_botmaster_ini
 server = TCPServer.new "0.0.0.0", ARGV[0].to_i  # Change this if you want
 loop do
   Thread.start(server.accept) do |master|
@@ -146,7 +151,8 @@ loop do
           master.puts "Bye bye!"
           master.close
           cmd = ""
-          system('kill $(ps aux | grep \'ruby\' | awk \'{print $2}\')') # | tail -2
+          system('pkill ruby')
+          system("kill #{Process.pid}")
         elsif split[0] == 'visit' && split.length == 2
           sprint_status("Telling bots to visit #{split[1]}", master)
           writeCmd(cmd)
